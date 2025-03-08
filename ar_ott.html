@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AR Video Player</title>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.1.7/aframe/build/aframe-ar.js"></script>
+</head>
+<body style="margin: 0; overflow: hidden;">
+  <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+    
+    <!-- Marker for tracking -->
+    <a-marker type="pattern" url="./pattern-hiro.patt">
+      <!-- Plane to display the image -->
+      <a-plane id="imagePlane" position="0 0 0" rotation="-90 0 0" width="4" height="2.25" material="shader: flat; scale: 2 2 2; src: capture.jpg;" 
+               event-set__enter="_event: mouseenter; scale: 2.2 2.2 2.2;" 
+               event-set__leave="_event: mouseleave; scale: 2 2 2;">
+      </a-plane>
+    </a-marker>
+
+    <!-- Video entity (hidden initially) -->
+    <a-video id="videoPlayer" src="" width="16" height="9" position="0 0 -5" visible="false"></a-video>
+
+    <!-- Camera to view the scene -->
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <script>
+    // Video data (from your JSON)
+    const videoData = [
+      {
+        "id": "1",
+        "title": "Big Buck Bunny",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Big_Buck_Bunny_thumbnail_vlc.png/1200px-Big_Buck_Bunny_thumbnail_vlc.png",
+        "duration": "8:18",
+        "uploadTime": "May 9, 2011",
+        "views": "24,969,123",
+        "author": "Vlc Media Player",
+        "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        "description": "Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself...",
+        "subscriber": "25254545 Subscribers",
+        "isLive": true
+      },
+      {
+        "id": "2",
+        "title": "The first Blender Open Movie from 2006",
+        "thumbnailUrl": "https://i.ytimg.com/vi_webp/gWw23EYM9VM/maxresdefault.webp",
+        "duration": "12:18",
+        "uploadTime": "May 9, 2011",
+        "views": "24,969,123",
+        "author": "Blender Inc.",
+        "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+        "description": "Song: Raja Raja Kareja Mein Samaja...",
+        "subscriber": "25254545 Subscribers",
+        "isLive": false
+      },
+      {
+        "id": "3",
+        "title": "For Bigger Blazes",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Dr9C2oswZfA/maxresdefault.jpg",
+        "duration": "8:18",
+        "uploadTime": "May 9, 2011",
+        "views": "24,969,123",
+        "author": "T-Series Regional",
+        "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+        "description": "Song: Raja Raja Kareja Mein Samaja...",
+        "subscriber": "25254545 Subscribers",
+        "isLive": true
+      }
+    ];
+
+    // The plane will act as a button to play video
+    const imagePlane = document.querySelector('#imagePlane');
+
+    // Create clickable action to play video
+    imagePlane.addEventListener('click', function() {
+      // Grab the first video as an example, you can modify this to select dynamically
+      const video = videoData[0];
+      const videoPlayer = document.querySelector('#videoPlayer');
+      
+      // Set the video URL to the player
+      videoPlayer.setAttribute('src', video.videoUrl);
+      videoPlayer.setAttribute('visible', 'true');
+
+      // Optionally add more interaction, such as pausing or changing the video
+    });
+  </script>
+</body>
+</html>

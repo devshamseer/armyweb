@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTT Platform</title>
+    <!-- Add Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom Styles for Video Cards */
+        .video-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .video-card img {
+            width: 100%;
+            height: 250px;
+
+        }
+
+        .live {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: red;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .video-card button {
+            background-color: #ff5f57;
+            color: white;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .video-card button:hover {
+            background-color: #e14d4b;
+        }
+
+        .description {
+            height: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="bg-dark text-white text-center py-4">
+        <h1 class="display-4">OTT Platform</h1>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="container py-5">
+        <div class="row" id="video-container">
+            <!-- Dynamic Video Cards will go here -->
+        </div>
+    </main>
+
+    <!-- Add Bootstrap 5 JS (including Popper for dropdowns and tooltips) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript for dynamic content -->
+    <script>
+        const data = [
+            {
+                "id": "1",
+                "title": "Big Buck Bunny",
+                "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Big_Buck_Bunny_thumbnail_vlc.png/1200px-Big_Buck_Bunny_thumbnail_vlc.png",
+                "duration": "8:18",
+                "uploadTime": "May 9, 2011",
+                "views": "24,969,123",
+                "author": "Vlc Media Player",
+                "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                "description": "Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain't no bunny anymore! In the typical cartoon tradition he prepares the nasty rodents a comical revenge.",
+                "subscriber": "25254545 Subscribers",
+                "isLive": true
+            },
+            {
+                "id": "2",
+                "title": "The first Blender Open Movie from 2006",
+                "thumbnailUrl": "https://i.ytimg.com/vi_webp/gWw23EYM9VM/maxresdefault.webp",
+                "duration": "12:18",
+                "uploadTime": "May 9, 2011",
+                "views": "24,969,123",
+                "author": "Blender Inc.",
+                "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+                "description": "Song : Raja Raja Kareja Mein Samaja\nAlbum : Raja Kareja Mein Samaja\nArtist : Radhe Shyam Rasia\nSinger : Radhe Shyam Rasia\nMusic Director : Sohan Lal, Dinesh Kumar\nLyricist : Vinay Bihari, Shailesh Sagar, Parmeshwar Premi\nMusic Label : T-Series",
+                "subscriber": "25254545 Subscribers",
+                "isLive": false
+            },
+            {
+                "id": "3",
+                "title": "For Bigger Blazes",
+                "thumbnailUrl": "https://i.ytimg.com/vi/Dr9C2oswZfA/maxresdefault.jpg",
+                "duration": "8:18",
+                "uploadTime": "May 9, 2011",
+                "views": "24,969,123",
+                "author": "T-Series Regional",
+                "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+                "description": "Song : Raja Raja Kareja Mein Samaja\nAlbum : Raja Kareja Mein Samaja\nArtist : Radhe Shyam Rasia\nSinger : Radhe Shyam Rasia\nMusic Director : Sohan Lal, Dinesh Kumar\nLyricist : Vinay Bihari, Shailesh Sagar, Parmeshwar Premi\nMusic Label : T-Series",
+                "subscriber": "25254545 Subscribers",
+                "isLive": true
+            },
+            // Add other video data as required
+        ];
+
+        const container = document.getElementById('video-container');
+
+        data.forEach(video => {
+            const videoCard = document.createElement('div');
+            videoCard.classList.add('col-md-4');
+
+            videoCard.innerHTML = `
+                <div class="video-card">
+                    <div class="live">${video.isLive ? 'LIVE' : ''}</div>
+                    <img src="${video.thumbnailUrl}" alt="${video.title}">
+                    <div class="p-3">
+                        <h5>${video.title}</h5>
+                        <p class="text-muted">${video.duration} | ${video.views} views</p>
+                        <p class="description">${video.description}</p>
+                        <button onclick="window.location.href='${video.videoUrl}'">Watch Now</button>
+                    </div>
+                </div>
+            `;
+            container.appendChild(videoCard);
+        });
+    </script>
+</body>
+</html>
